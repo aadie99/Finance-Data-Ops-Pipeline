@@ -1,0 +1,14 @@
+# Ignore raw data files
+data/
+*.csv
+
+# Ignore logs
+*.log 
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual env
+.venv/
+env/
