@@ -5,7 +5,7 @@ USE finance_pipeline;
 
 -- SANITY CHECK - PREVIEW
 SELECT * FROM uci_credit_card_default_raw LIMIT 5;
-
+ 
 -- VALIDATION CHECKS - PHASE 1
 -- 1. ROW COUNT
 SELECT COUNT(*) AS ROW_COUNT
@@ -32,7 +32,21 @@ SELECT
   AVG(`default.payment.next.month`) * 100 AS default_rate_percent
 FROM uci_credit_card_default_raw;
 
+-- 5. BASIC PROFILING QUERIES
+SELECT MIN(AGE), MAX(AGE), AVG(AGE) 
+FROM uci_credit_card_default_raw;
 
+SELECT PAY_0, COUNT(*) AS Customers, AVG(`default.payment.next.month`) * 100 AS Default_rate_percent
+FROM uci_credit_card_default_raw
+GROUP BY PAY_0
+ORDER BY PAY_0;
+
+SELECT PAY_0,
+       SUM(`default.payment.next.month`) AS total_defaults,
+       COUNT(*) AS total_rows
+FROM uci_credit_card_default_raw
+GROUP BY PAY_0
+ORDER BY PAY_0;
 
 
 
