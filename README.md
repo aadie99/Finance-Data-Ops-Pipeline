@@ -51,9 +51,15 @@ Upcoming:
 - Created database: `finance_pipeline`
 - Imported CSV into table: `uci_credit_card_default_raw`
 
+
+![alt text](screenshots/phase1_mysql_import_sanity_check.png)
+
+
 ---
 
 ### 2. Data Sanity Checks Performed
+
+![alt text](screenshots/phase1_mysql_data_validations.png)
 
 #### Row Count Validation
 
@@ -89,3 +95,41 @@ FROM uci_credit_card_default_raw;
 ```
 `Result: Default Rate ~ 22%`
 
+---
+
+### 3. Basic Profiling and Default Segmentation Queries
+
+#### Repayment Behavior vs Default Risk (PAY_0 Analysis)
+
+```sql
+SELECT
+  PAY_0,
+  COUNT(*) AS customers,
+  ROUND(AVG(`default.payment.next.month`) * 100, 2) AS default_rate_percent
+FROM uci_credit_card_default_raw
+GROUP BY PAY_0
+ORDER BY PAY_0;
+```
+#### What This Query Does?
+1. Groups customers based on their most recent repayment status (PAY_0)
+2. Counts how many customers fall into each repayment category
+3. Calculates the default rate percentage within each group
+4. Helps measure how repayment delays correlate with default risk
+
+
+![alt text](screenshots/phase1_default_rate_by_pay_0.png)
+
+#### Interpretation of Results
+
+1. Customers with PAY_0 = -2 or -1 (paid on time / early) show very low default rates
+2. Customers with PAY_0 = 0 (no delay) have moderate default risk
+3. Customers with PAY_0 = 1, 2, 3+ show progressively higher default percentages
+4. Severe repayment delays correspond to significantly increased default probability
+
+This confirms that recent repayment behavior is a strong predictor of default risk
+
+#### Key Insight
+
+1. The analysis demonstrates a clear relationship between repayment delay and credit default risk.
+2. As repayment delay increases, the percentage of customers defaulting in the following month increases substantially.
+3. This validates repayment history as a critical feature for credit risk modeling and financial decision-making.
