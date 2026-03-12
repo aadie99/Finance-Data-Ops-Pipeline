@@ -139,6 +139,8 @@ This confirms that recent repayment behavior is a strong predictor of default ri
 # Phase 2 – Python ETL and Validation Automation
 In this phase, the raw CSV ingestion workflow was automated using Python and pandas.
 
+![alt text](screenshots/phase2_python_etl.png)
+
 ### Tasks performed
 - Read raw dataset from CSV
 - Standardized column names for easier downstream processing
