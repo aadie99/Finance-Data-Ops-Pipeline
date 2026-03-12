@@ -133,3 +133,21 @@ This confirms that recent repayment behavior is a strong predictor of default ri
 1. The analysis demonstrates a clear relationship between repayment delay and credit default risk.
 2. As repayment delay increases, the percentage of customers defaulting in the following month increases substantially.
 3. This validates repayment history as a critical feature for credit risk modeling and financial decision-making.
+
+---
+
+# Phase 2 – Python ETL and Validation Automation
+In this phase, the raw CSV ingestion workflow was automated using Python and pandas.
+
+### Tasks performed
+- Read raw dataset from CSV
+- Standardized column names for easier downstream processing
+- Automated validation checks:
+  - row count
+  - null checks
+  - duplicate ID checks
+  - default rate calculation
+- Exported cleaned dataset to `data/processed/uci_credit_card_clean.csv`
+
+### Key outcome
+This phase converted manual SQL-based validation into a reusable Python ETL step, improving consistency and preparing the dataset for downstream SQL loading and cloud analytics.
