@@ -1,0 +1,11 @@
+
+--- VALIDATION SUMMARY ---
+
+Row count: 30000
+
+Null counts by column:
+No null values found.
+
+Duplicate ID count: 0
+
+Default rate: 22.12%
